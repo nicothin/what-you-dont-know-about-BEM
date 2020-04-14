@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>БЭМ и чего вы о нём не знаете</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="shower/themes/material/styles/screen-16x10.css">
+  <link rel="stylesheet" href="prism/prism.css">
+  <link rel="stylesheet" href="shower/nicothin.css">
+</head>
+<body class="shower list">
+
+  <header class="caption">
+    <h1>БЭМ и чего вы о нём не знаете</h1>
+  </header>
+
+  <section class="slide" id="cover">
+    <h2>БЭМ и чего вы о нём не знаете</h2>
+    <p>
+      <a href="http://nicothin.pro">Николай Громов</a>
+    </p>
+    <figure>
+      <img class="cover" src="pictures/cover.jpg" alt="go-go-go!">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <h2>Что такое БЭМ</h2>
+    <p>Это компонентый подход к разработке веб-приложения: разделение интерфейса на независимые блоки (и их элементы).</p>
+    <p>В разметке реализуется атрибутами <code>class</code>.</p>
+    <div class="next">
+      <p><strong>Блок</strong> — логически и функционально независимая часть.</p>
+      <p><strong>Элемент</strong> — всегда часть блока, самостятельно не нужен.</p>
+      <p><strong>Модификатор</strong> — класс, меняющий внешний вид/поведение блока/элемента.</p>
+    </div>
+    <p class="next">Существует как методология и как стек технологий.</p>
+  </section>
+
+  <div class="slide">
+    <pre class="language-html">
+      <code>&lt;article class=&quot;blog-post&quot;&gt;</code>
+      <code>  &lt;h2 class=&quot;blog-post__title&quot;&gt;...&lt;/h2&gt;</code>
+      <code>  &lt;div class=&quot;blog-post__content&quot;&gt;</code>
+      <code>    ...</code>
+      <code>  &lt;/div&gt;</code>
+      <code>  &lt;footer class=&quot;blog-post__footer&quot;&gt;...&lt;/footer&gt;</code>
+      <code>&lt;/article&gt;</code>
+      <code> </code>
+      <code>&lt;article class=&quot;blog-post  blog-post--accent&quot;&gt;</code>
+      <code>  &lt;h2 class=&quot;blog-post__title&quot;&gt;...&lt;/h2&gt;</code>
+      <code>  &lt;div class=&quot;blog-post__content&quot;&gt;</code>
+      <code>    ...</code>
+      <code>  &lt;/div&gt;</code>
+      <code>  &lt;footer class=&quot;blog-post__footer&quot;&gt;...&lt;/footer&gt;</code>
+      <code>&lt;/article&gt;</code>
+    </pre>
+  </div>
+
+  <section class="slide">
+    <h2>Что получаем с БЭМ?</h2>
+    <ol>
+      <li>Единый язык для всех участников проекта.</li>
+      <li class="next">Уникальные имена селекторов: модификация легче и безопаснее.</li>
+      <li class="next">Самодокументируемость.</li>
+      <li class="next">Простое проектное реиспользование. С модификациями по необходимости.</li>
+      <li class="next">Простое кросспроектное реиспользование.</li>
+      <li class="next comment">Чёткая файловая стркутура.</li>
+      <li class="next comment">Отсутствие кода блоков, не используемых на проекте.</li>
+    </ol>
+  </section>
+
+  <section class="slide">
+    <h2>Вопросы</h2>
+    <p>Проверяем понимание БЭМ.</p>
+    <ol>
+      <li>Какие части страницы — всегда Блоки?</li>
+      <li class="next">Разметка: Элемент обязан лежать внутри своего Блока?</li>
+      <li class="next">Можно ли на одном теге написать класс Блока и класс Элемента?</li>
+      <li class="next">Бывают ли Элементы Элементов?</li>
+      <li class="next">Какие существуют типы Модификаторов?</li>
+      <li class="next">Можно ли в стилях модифицировать Элемент от Модификатора Блока?</li>
+    </ol>
+  </section>
+
+  <section class="slide">
+    <h2>Вопросы</h2>
+    <ol>
+      <li>В «шапке» есть кнопка, ей нужен <code>margin</code>, как это сделать?</li>
+      <li class="next">Почему БЭМ рекомендует отказ от <code>id</code> в селекторах?</li>
+      <li class="next">Почему БЭМ рекомендует отказ от тегов в селекторах?</li>
+      <li class="next">Из-за чего БЭМ рекомендует избегать комбинированных селекторов?</li>
+    </ol>
+  </section>
+
+
+
+
+
+  <section class="slide">
+    <h2 class="shout">Диалекты</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Диалекты: канонiчный вариант</h2>
+    <pre class="language-html">
+      <code>&lt;!-- main-menu — Блок --></code>
+      <code>&lt;ul class="main-menu"></code>
+      <code>  &lt;!-- main-menu__item — Элемент --></code>
+      <code>  &lt;li class="main-menu__item"></code>
+      <code>  &lt;!-- main-menu__link — Элемент --></code>
+      <code>    &lt;a href="/home" class="main-menu__link">Home&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>  &lt;!-- main-menu__item_active — Модификатор --></code>
+      <code>  &lt;li class="main-menu__item  main-menu__item_active"></code>
+      <code>    &lt;a href="/about" class="main-menu__link">About&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Диалекты: no-namespace</h2>
+    <pre class="language-html">
+      <code>&lt;!-- main-menu — Блок --></code>
+      <code>&lt;ul class="main-menu"></code>
+      <code>  &lt;!-- main-menu__item — Элемент --></code>
+      <code>  &lt;li class="main-menu__item"></code>
+      <code>  &lt;!-- main-menu__link — Элемент --></code>
+      <code>    &lt;a href="/home" class="main-menu__link">Home&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>  &lt;!-- _active — Модификатор --></code>
+      <code>  &lt;li class="main-menu__item  _active"></code>
+      <code>    &lt;a href="/about" class="main-menu__link">About&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Диалекты: two dashes</h2>
+    <pre class="language-html">
+      <code>&lt;!-- main-menu — Блок --></code>
+      <code>&lt;ul class="main-menu"></code>
+      <code>  &lt;!-- main-menu__item — Элемент --></code>
+      <code>  &lt;li class="main-menu__item"></code>
+      <code>  &lt;!-- main-menu__link — Элемент --></code>
+      <code>    &lt;a href="/home" class="main-menu__link">Home&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>  &lt;!-- main-menu__item--active — Модификатор --></code>
+      <code>  &lt;li class="main-menu__item  main-menu__item--active"></code>
+      <code>    &lt;a href="/about" class="main-menu__link">About&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Диалекты: CamelCase</h2>
+    <pre class="language-html">
+      <code>&lt;!-- MainMenu — Блок --></code>
+      <code>&lt;ul class="MainMenu"></code>
+      <code>  &lt;!-- MainMenu__Item — Элемент --></code>
+      <code>  &lt;li class="MainMenu__Item"></code>
+      <code>  &lt;!-- MainMenu__Link — Элемент --></code>
+      <code>    &lt;a href="/home" class="MainMenu__Link">Home&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>  &lt;!-- MainMenu__Item_active — Модификатор --></code>
+      <code>  &lt;li class="MainMenu__Item  MainMenu__Item_active"></code>
+      <code>    &lt;a href="/about" class="MainMenu__Link">About&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Диалекты: React</h2>
+    <pre class="language-html">
+      <code>&lt;!-- MainMenu — Блок --></code>
+      <code>&lt;ul class="MainMenu"></code>
+      <code>  &lt;!-- MainMenu-Item — Элемент --></code>
+      <code>  &lt;li class="MainMenu-Item"></code>
+      <code>  &lt;!-- MainMenu-Link — Элемент --></code>
+      <code>    &lt;a href="/home" class="MainMenu-Link">Home&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>  &lt;!-- MainMenu-Item_active — Модификатор --></code>
+      <code>  &lt;li class="MainMenu-Item  MainMenu-Item_active"></code>
+      <code>    &lt;a href="/about" class="MainMenu-Link">About&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+
+
+
+
+  <section class="slide">
+    <h2 class="shout">Модификации</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Модификации БЭМ: префиксы</h2>
+    <p>
+      <code>b-</code> — блок
+    </p>
+    <p>
+      <code>o-</code> — объект, <code>e-</code> — элемент
+    </p>
+    <p>
+      <code>c-</code> — компонент или контрол
+    </p>
+    <p>
+      <code>l-</code> — layout (раскладка), <code>p-</code> — page
+    </p>
+    <p>
+      <code>u-</code> — утилита
+    </p>
+    <p>
+      <code>t-</code> — тема оформления
+    </p>
+    <p>
+      <code>g-</code> — глобальный модификатор
+    </p>
+    <p>
+      <code>is-/has-</code> — состояния
+    </p>
+  </section>
+
+  <section class="slide">
+    <pre class="language-html">
+      <code>&lt;section class="promo"></code>
+      <code>  &lt;h2 class="promo__title  title">Купите наши цинковые вёдра&lt;/h2></code>
+      <code>  &lt;ul class="promo__list  grid"></code>
+      <code>    &lt;li class="product-card  grid__item">...&lt;/li></code>
+      <code>  &lt;/ul></code>
+      <code>&lt;/section></code>
+    </pre>
+    <pre class="language-html">
+      <code>&lt;section class="c-promo"></code>
+      <code>  &lt;h2 class="c-promo__title  c-title">Купите наши цинковые вёдра&lt;/h2></code>
+      <code>  &lt;ul class="c-promo__list  l-grid"></code>
+      <code>    &lt;li class="c-product-card  l-grid__item">...&lt;/li></code>
+      <code>  &lt;/ul></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <pre class="language-html">
+      <code>&lt;ul class="l-list"></code>
+      <code>  &lt;li class="l-list__item"></code>
+      <code>    &lt;div class="c-checkbox"></code>
+      <code>      &lt;input class="c-checkbox__input" id="op_1" type="checkbox"></code>
+      <code>      &lt;label class="c-checkbox__label" for="op_1">Apples&lt;/label></code>
+      <code>    &lt;/div></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+    <pre class="language-html">
+      <code>&lt;div class="o-media  c-user  c-user--premium"></code>
+      <code>  &lt;img class="o-media__img  c-user__photo  c-avatar" src="" alt="" /></code>
+      <code>  &lt;p class="o-media__body  c-user__bio">...&lt;/p></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Модификации БЭМ: суффиксы</h2>
+    <p>
+      <code>-nojs</code> — убираемый суффикс стилизации состояния без JS
+    </p>
+    <p>
+      <code>@sm, @md, @lg</code> — адаптивные суффиксы
+    </p>
+    <p>
+      <code>@print</code> — вспомогательные классы для сокрытия блоков при печати
+    </p>
+  </section>
+
+  <section class="slide">
+    <pre class="language-html">
+      <code> </code>
+      <code>&lt;div class="o-media@md  c-user  c-user--premium"></code>
+      <code>  &lt;img class="o-media@md__img  c-user__photo  c-avatar" src="" alt="" /></code>
+      <code>  &lt;p class="o-media@md__body  c-user__bio">...&lt;/p></code>
+      <code>&lt;/div></code>
+      <code> </code>
+    </pre>
+    <pre class="language-css">
+      <code>@media print {</code>
+      <code> </code>
+      <code>  .u-hidden\@print {</code>
+      <code>    display: none;</code>
+      <code>  }</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+
+
+
+
+  <section class="slide">
+    <h2 class="shout">Ошибки и проблемы</h2>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Именования блока/элемента с описанием «как выглядит».</h3>
+    <pre class="language-html">
+      <code>&lt;div class="promo"></code>
+      <code>  &lt;h2 class="promo__gray-title">...&lt;/h2></code>
+      <code>&lt;/div></code>
+      <code>&lt;button class="button-red">Buy me!&lt;/button></code>
+      <code>&lt;span class="black-icon">...&lt;/span></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Элементы элементов.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="tariff"></code>
+      <code>  &lt;header class="tariff__header"></code>
+      <code>    &lt;h3 class="tariff__header__title">Tariff № 2&lt;/h3></code>
+      <code>  &lt;/header></code>
+      <code>  &lt;div class="tariff__info"></code>
+      <code>    &lt;p class="tariff__info__price"></code>
+      <code>      200 &lt;span class="tariff__info__price__icon">&lt;/span></code>
+      <code>    &lt;/p></code>
+      <code>  &lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Использование элемента в отсутствие блока.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="promo"></code>
+      <code>  ...</code>
+      <code>  &lt;div class="promo__item"></code>
+      <code>    ...</code>
+      <code>    &lt;!-- Блок slider отсутствует на странице --></code>
+      <code>    &lt;div class="slider__item">...&lt;/div></code>
+      <code>  &lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Попытка комбинации имён сущностей в имени вложенного блока.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="tariffs"></code>
+      <code>  ...</code>
+      <code>  &lt;div class="tariffs__item"></code>
+      <code>    &lt;h3 class="tariffs__item-header">Tariff № 2&lt;/h3></code>
+      <code>    &lt;p class="tariffs__item-header">...&lt;/p></code>
+      <code>    &lt;div class="tariffs-item"> &lt;!-- tariff — было бы лучше --></code>
+      <code>      &lt;div class="tariffs-item__main-info">...&lt;/div></code>
+      <code>    &lt;/div></code>
+      <code>  &lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Автомиксование.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="promo  promo__info"></code>
+      <code>  &lt;h2 class="promo__title">Promo&lt;/h2></code>
+      <code>  &lt;div class="promo__list"></code>
+      <code>    ...</code>
+      <code>  &lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Использование класса-модификатора в одиночестве.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="promo"></code>
+      <code>  ...</code>
+      <code>  &lt;div class="promo__item">...&lt;/div></code>
+      <code>  &lt;div class="promo__item--large">...&lt;/div></code>
+      <code>  &lt;div class="promo__item">...&lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Смешение модификаторов.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="article"></code>
+      <code>  &lt;h2 class="article__heading  article__heading_level_1_active">...&lt;/h2></code>
+      <code>  ...</code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Неоправданное использование модификаторов.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="layout-profile"></code>
+      <code>  &lt;h2 class="layout-profile__name-header  ft-typography  _h1">...&lt;/h2></code>
+      <code>  ...</code>
+      <code>&lt;/section></code>
+    </pre>
+    <pre class="language-css">
+      <code>.ft-typography { position: relative; }</code>
+      <code>.ft-typography._h1 { color: #232428; font-family: Effra, sans-serif; }</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Некорректное использование модификаторов.</h3>
+    <pre class="language-html">
+      <code>&lt;div class="table"></code>
+      <code>  &lt;div class="table__head"></code>
+      <code>    &lt;div class="table__head-title  table__head-title--version">Версия&lt;/div></code>
+      <code>    &lt;div class="table__head-title  table__head-title--date">Дата&lt;/div></code>
+      <code>    &lt;div class="table__head-title  table__head-title--author">Автор&lt;/div></code>
+      <code>    &lt;div class="table__head-title  table__head-title--descr">Примечание&lt;/div></code>
+      <code>  &lt;/div></code>
+      <code>  ...</code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Классы-хелперы.</h3>
+    <pre class="language-html">
+      <code>&lt;section class="promo"></code>
+      <code>  &lt;h2 class="promo__title  text-muted">Promo&lt;/h2></code>
+      <code>  &lt;div class="text-right"></code>
+      <code>    ...</code>
+      <code>  &lt;/div></code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Стили блока, влиящие на его окружение.</h3>
+    <pre class="language-html">
+      <code>&lt;button class="btn">Button&lt;/button></code>
+    </pre>
+    <pre class="language-css">
+      <code>.btn {</code>
+      <code>  /* много стилей и... */</code>
+      <code>  margin-right: 20px;</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Стили блока, в рассчёте на конкретный тег.</h3>
+    <pre class="language-html">
+      <code>&lt;h2 class="subtitle">Subtitle&lt;/h2></code>
+    </pre>
+    <pre class="language-css">
+      <code>.subtitle {</code>
+      <code>  margin-top: 20px;</code>
+      <code>  font-size: 24px;</code>
+      <code>  line-height: 1.2</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Несовпадение имени файла и стилизуемого (в файле) блока.</h3>
+    <pre class="">
+      <code>src/scss/components/common.blocks/the-sidebar/the-sidebar.scss</code>
+    </pre>
+    <pre class="language-scss">
+      <code>.sidebar { ... }</code>
+    </pre>
+    <pre class="">
+      <code>src/scss/pages/common.blocks/athletes/athletes.scss</code>
+    </pre>
+    <pre class="language-scss">
+      <code>.p-athletes { ... }</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные случаи</h2>
+    <h3>Вывод текста из WYSIWYG.</h3>
+    <pre class="language-scss">
+      <code>.promo {</code>
+      <code> </code>
+      <code>  &__text {</code>
+      <code>   </code>
+      <code>    h2 { ... }</code>
+      <code>   </code>
+      <code>    p { ... }</code>
+      <code>  }</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные случаи</h2>
+    <h3>Контекстная модификация.</h3>
+    <pre class="language-js">
+      <code>function cth(c) { document.documentElement.classList.add(c) }</code>
+      <code>'ontouchstart' in window ? cth('touch') : cth('no-touch');</code>
+      <code>if (typeof InstallTrigger!=='undefined') cth('firefox');</code>
+      <code>if (/*@cc_on!@*/false||!!document.documentMode) cth('ie');</code>
+    </pre>
+    <pre class="next  language-scss">
+      <code>.product-minicard {</code>
+      <code> </code>
+      <code>  .ie & { ... }</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные случаи</h2>
+    <h3>Комбинации с легаси.</h3>
+    <pre class="language-html">
+      <code>&lt;div class="glavnayaStranitsa"></code>
+      <code>  &lt;h1 class="zagolovok">Заголовок&lt;/h2></code>
+      <code>  ...</code>
+      <code>  &lt;!-- Оправданное использование префикса b- --></code>
+      <code>  &lt;article class="b-product-minicard">...&lt;/article></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+
+
+
+
+  <section class="slide">
+    <h2 class="shout">Критика БЭМ</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Критика БЭМ: нечитабельный HTML</h2>
+    <pre class="language-html" style="font-size:90%;margin-bottom:0!important">
+      <code>&lt;ul class="article-rewind  article-rewind_type_static  article-rewind_lang_ru"></code>
+      <code>  &lt;li class="article-rewind__next"></code>
+      <code>    &lt;div class="article-rewind__next-text">Читать далее&lt;/div></code>
+      <code>    &lt;a class="article-rewind__next-link" href="...">Основные понятия&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+    <pre class="language-html" style="font-size:90%;margin-top:-26px!important">
+      <code>&lt;ul class="article-rewind  type_static  lang_ru"></code>
+      <code>  &lt;li class="next"></code>
+      <code>    &lt;div class="text">Читать далее&lt;/div></code>
+      <code>    &lt;a class="link" href="...">Основные понятия&lt;/a></code>
+      <code>  &lt;/li></code>
+      <code>&lt;/ul></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Критика БЭМ: запрет глобальных модификаторов</h2>
+    <pre class="language-html">
+      <code>&lt;!-- Сохрана разметка от автора «критики» --></code>
+      <code>&lt;section class="promo-section  promo-section_color_white"></code>
+      <code>  ...</code>
+      <code>&lt;/section></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Критика БЭМ: «запрет» «семантики» в селекторе</h2>
+    <pre class="language-html">
+      <code>&lt;h1 class="article__title">...&lt;/h1></code>
+      <code>&lt;h2 class="article__title  article__title--level-2">...&lt;/h2></code>
+      <code>&lt;h3 class="article__title  article__title--level-2">...&lt;/h3></code>
+    </pre>
+    <pre class="language-scss">
+      <code>@for $index from 1 through 6 {</code>
+      <code>  h#{$index}.heading {</code>
+      <code>    font-size: (42px / $index);</code>
+      <code>  }</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+
+
+
+
+  <section class="slide">
+    <h2 class="shout">Автоматизация</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Автоматизация: <a href="https://ru.bem.info/tutorials/classic/quick-start-static/">полный стек</a></h2>
+    <pre class="language-js">
+      <code>// desktop.bundles/hello/hello.bemjson.js</code>
+      <code>({</code>
+      <code>  block : 'page',</code>
+      <code>  title : 'hello',</code>
+      <code>  head : [</code>
+      <code>    { elem : 'css', url : 'hello.min.css' }</code>
+      <code>  ],</code>
+      <code>  mods : { theme : 'islands' },</code>
+      <code>  content : [</code>
+      <code>    { block : 'hello' }</code>
+      <code>  ]</code>
+      <code>})</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <pre class="language-js">
+      <code>// desktop.bundles/hello/hello.bemjson.js</code>
+      <code>({</code>
+      <code>  ...</code>
+      <code>  content : [</code>
+      <code>    {</code>
+      <code>      block : 'hello',</code>
+      <code>      content : [</code>
+      <code>        {</code>
+      <code>          elem : 'greeting',</code>
+      <code>          content : 'Hello %user%!'</code>
+      <code>        }</code>
+      <code>      ]</code>
+      <code>    }</code>
+      <code>  ]</code>
+      <code>})</code>
+      <code> </code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <pre class="language-js">
+      <code>// desktop.blocks/hello/hello.bemhtml.js</code>
+      <code>block('hello')(</code>
+      <code>  tag()('article')</code>
+      <code>);</code>
+    </pre>
+    <pre class="language-css">
+      <code>/* desktop.blocks/hello/hello.css */</code>
+      <code>.hello {</code>
+      <code>  color: green;</code>
+      <code>  padding: 10%;</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Автоматизация: <a href="https://www.npmjs.com/package/beml">BEML</a></h2>
+    <pre class="language-html" style="margin-bottom:-30px!important">
+      <code>&lt;div block="animals"></code>
+      <code>  &lt;div elem="item" mix="block:unicorn, mod: [large, female]"></code>
+      <code>    &lt;div block="unicorn" elem="photo">&lt;/div></code>
+      <code>    &lt;div elem="item-name">&lt;/div></code>
+      <code>  &lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+    <pre class="language-html" style="margin-top:-30px!important">
+      <code>&lt;div class="animals"></code>
+      <code>  &lt;div class="animals__item  unicorn  unicorn_large  unicorn_female"></code>
+      <code>    &lt;div class="unicorn__photo">&lt;/div></code>
+      <code>    &lt;div class="animals__item-name">&lt;/div></code>
+      <code>  &lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Автоматизация: <a href="https://www.npmjs.com/package/posthtml-bem">PostHTML-bem</a></h2>
+    <pre class="language-html">
+      <code>&lt;div block="animal" mix="block:elephant elem:trunk"></code>
+      <code>  &lt;div elem="nose" mods="size:long">Nose&lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+    <pre class="language-html">
+      <code>&lt;div class="animal  elephant__trunk"></code>
+      <code>  &lt;div class="animal__nose  animal__nose_size_long">Nose&lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Автоматизация: <a href="https://www.npmjs.com/package/bemto.pug">bemto.pug</a></h2>
+    <pre class="language-pug" style="margin-bottom:0!important">
+      <code>+b.block1</code>
+      <code>  +e.element1 Foo</code>
+      <code>  +b.block2</code>
+      <code>    +e.A(href="#bar").element Bar</code>
+      <code>  +e.element2 Baz</code>
+    </pre>
+    <pre class="language-html" style="margin-top:-30px!important">
+      <code>&lt;div class="block1"></code>
+      <code>  &lt;div class="block1__element1">Foo&lt;/div></code>
+      <code>  &lt;div class="block2"></code>
+      <code>    &lt;a class="block2__element" href="#bar">Bar&lt;/a></code>
+      <code>  &lt;/div></code>
+      <code>  &lt;div class="block1__element2">Baz&lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Вопросы?</h2>
+    <ul>
+      <li><a href="https://vk.com/n.gromov">vk.com/n.gromov</a></li>
+      <li><a href="http://nicothin.pro/contact">nicothin.pro/contact</a></li>
+    </ul>
+    <p>Николай Громов.</p>
+  </section>
+
+  <div class="slide black" id="bonus" style="display: flex; justify-content: center; align-items: center;">
+    <img class="cover" src="pictures/image_epixx_20170817_html_012.jpg" style="width: 105%; height: auto; max-height: none; filter: blur(3px);" alt="">
+    <p style="color: #fff; z-index: 2; max-width: 446px; text-align: center;"><b>Бонус</b> <br>скидка 10% на любой курс в <a href="https://epixx.ru/">EpicSkills</a> по промо-коду <b>GROMOV10</b></p>
+    <style>
+      #bonus:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.5);
+      }
+    </style>
+  </div>
+
+
+  <div class="progress"></div>
+
+  <script src="shower/shower.min.js"></script>
+  <script src="prism/prism.js"></script>
+
+</body>
+</html>
