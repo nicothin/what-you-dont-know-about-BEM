@@ -380,6 +380,18 @@
 
   <section class="slide">
     <h2>БЭМ-ошибки и проблемы</h2>
+    <h3>Использование Элемента без его Блока.</h3>
+    <pre class="language-html">
+      <code>&lt;hedaer class="page-header"></code>
+      <code>  ...</code>
+      <code>  &lt;!-- Нигде на странице нет Блока promo --></code>
+      <code>  &lt;div class="promo__item">...&lt;/div></code>
+      <code>&lt;/hedaer></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>БЭМ-ошибки и проблемы</h2>
     <h3>Использование класса-модификатора в одиночестве.</h3>
     <pre class="language-html">
       <code>&lt;section class="promo"></code>
@@ -534,6 +546,23 @@
       <code>  ...</code>
       <code>  &lt;!-- Оправданное использование префикса b- --></code>
       <code>  &lt;article class="b-product-minicard">...&lt;/article></code>
+      <code>&lt;/div></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные случаи</h2>
+    <h3>Место применения модификатора.</h3>
+    <pre class="language-html">
+      <code>&lt;div class="preloader"></code>
+      <code>  &lt;!-- preloader__container — единственный прямой потомок --></code>
+      <code>  &lt;div class="preloader__container  preloader__container--sm"> ... &lt;/div></code>
+      <code>&lt;/div></code>
+    </pre>
+    <pre class="language-html">
+      <code>&lt;div class="preloader  preloader--sm"></code>
+      <code>  &lt;!-- preloader__container — единственный прямой потомок --></code>
+      <code>  &lt;div class="preloader__container"> ... &lt;/div></code>
       <code>&lt;/div></code>
     </pre>
   </section>
